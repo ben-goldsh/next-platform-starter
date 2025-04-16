@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "HUD WRAPPER STARTED - $(date)" >&2
+
+# the path to the interpreter and all of the originally intended arguments
+args=("$@")
+
+# If the HUD_INTERNAL_EXEC_WRAPPER_IMPORT_PATH environment variable is set, use it as the extra_args
+if [ -n "$HUD_INTERNAL_EXEC_WRAPPER_IMPORT_PATH" ]; then
+    extra_args=("--import" "$HUD_INTERNAL_EXEC_WRAPPER_IMPORT_PATH")
+else
+    extra_args=("--import" "hud-sdk/register")
+fi
+
+# insert the extra options
+args=("${args[@]:0:$#-1}" "${extra_args[@]}" "${args[@]: -1}")
+
+echo "Final command: ${args[@]}" >&2
+
+# start the runtime with the extra options
+exec "${args[@]}"

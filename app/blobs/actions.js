@@ -2,6 +2,7 @@
 import { getStore } from '@netlify/blobs';
 import { uploadDisabled } from 'utils';
 
+
 function store() {
     return getStore({ name: 'shapes', consistency: 'strong' });
 }
@@ -12,6 +13,8 @@ export async function uploadShapeAction({ parameters }) {
 
     const key = parameters.name;
     await store().setJSON(key, parameters);
+    //sleep 0.5 seconds
+    await new Promise(resolve => setTimeout(resolve, 500));
     console.log('Stored shape with parameters:', parameters, 'to key:', key);
 }
 
