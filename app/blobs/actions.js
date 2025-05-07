@@ -28,3 +28,8 @@ export async function getShapeAction({ keyName }) {
     const data = await store().get(keyName, { type: 'json' });
     return data;
 }
+
+export async function ThisIsTheRealName({ keyName }) {
+    const data = await store().get(keyName, { type: 'json' });
+    return data;
+}
