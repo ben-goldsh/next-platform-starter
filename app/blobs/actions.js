@@ -25,6 +25,8 @@ export async function listShapesAction() {
 }
 
 export async function getShapeAction({ keyName }) {
+    console.log('Getting shape with key:', keyName);
+
     const data = await store().get(keyName, { type: 'json' });
     return data;
 }
